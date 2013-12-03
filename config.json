@@ -1,0 +1,24 @@
+{
+	"path": {
+		"assets": "/assets",
+		"controllers": "/controllers",
+		"filters": "/filters",
+		"models": "/models",
+		"associations": "/models/.associations.js",
+		"views": "/views",
+		"layouts": "/layouts",
+		"partials": "/partials",
+		"targets": "/targets"
+	},
+	
+	"viewExt": "tpl",
+	"useLayout": true,
+	"defaultLayout": "layout",
+	
+	"session": {
+		"key": "appsessionid",
+		"maxAge": 3600000
+	},
+	
+	"mail": "administrator@domain.com"
+}
