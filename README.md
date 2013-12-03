@@ -75,17 +75,15 @@ In order to do some pre-treatment before real action process, there designed a f
 
 If a controller need to be intercepted by some filters, it should be define like this:
 
-	module.get = {
-		// filters which have same name in `filters/` folder
-		// if defined, must be an Array
-		filters: ['authorization'],
-		
-		// real function process
-		process: function (req, res, next) {
-			// ...
-			res.send(200, 'OK');
-		}
+	// real controller process
+	module.get = function (req, res, next) {
+		// ...
+		res.send(200, 'OK');
 	};
+
+	// filters which have same name in `filters/` folder
+	// if defined, must be an Array
+	module.get.filters = ['authorization'];
 
 And if an action don't need filters, the controller definition just exports a process function is also ok.
 
