@@ -9,7 +9,7 @@
 		"mysql": "2.0.x",
 		"sequelize": "2.0.x",
 		"hogan-express": "0.3.x",
-		"rainbow": "0.1.0",
+		"rainbow": "0.2.0",
     	"glob": "3.x",
     	"nodemailer": "0.3.x"
 	},
