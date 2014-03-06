@@ -3,12 +3,10 @@
 		"assets": "/assets",
 		"controllers": "/controllers",
 		"filters": "/filters",
-		"models": "/models",
-		"associations": "/models/.associations.js",
+		"cache": "/views/cache",
 		"views": "/views",
-		"layouts": "/layouts",
-		"partials": "/partials",
-		"targets": "/targets"
+		"layouts": "/views/layouts",
+		"partials": "/views/partials"
 	},
 	
 	"viewExt": "tpl",
