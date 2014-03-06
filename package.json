@@ -10,7 +10,7 @@
 		"sequelize": "2.0.x",
 		"hogan-express": "0.3.x",
 		"rainbow": "0.2.0",
-		"mustlayout": "0.0.1",
+		"mustlayout": "0.0.2",
     	"glob": "3.x",
     	"nodemailer": "0.3.x"
 	},
