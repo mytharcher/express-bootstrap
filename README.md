@@ -13,7 +13,7 @@ Before you begin to develop, make sure you have known something about these:
 0. [Sequelize][]: node.js database ORM middleware
 0. MySQL
 0. [Heroku](http://www.heroku.com/): this sample is held on Heroku PaaS
-0. [mustache](http://mustache.github.com/) ([Hogan](https://github.com/twitter/hogan.js)): logic-less template engine
+0. [mustache](http://mustache.github.com/) ([Hogan](https://github.com/twitter/hogan.js), [Handlebars](http://handlebarsjs.com/)): logic-less template engine
 
 ## Local deployment ##
 
@@ -63,7 +63,7 @@ You need run these steps just once.
 
 All models are about database tables, and use [Sequelize][] ORM framework to manage them in `models/` folder.
 
-Every file in `models/` folder defined a database table, use **camel case** table name, excluding a special file `.associations` which maintains all tables associations (1 to 1, 1 to many, many to many) in it.
+Every file in `models/` folder defined a database table, use **camel case** table name, excluding a special file `index.js` which maintains all tables associations (1 to 1, 1 to many, many to many) in it.
 
 #### Controller(action) ####
 
@@ -88,6 +88,19 @@ If a controller need to be intercepted by some filters, it should be define like
 And if an action don't need filters, the controller definition just exports a process function is also ok.
 
 All controllers routing had been move to a single npm. See more about [Rainbow](https://github.com/mytharcher/rainbow).
+
+#### View (template engine) ####
+
+Use [MustLayout](https://github.com/mytharcher/mustlayout) to configurate express view engine. Default to:
+
+* Views: `/views`
+* Partials: `/views/partials`
+* Layouts: `/views/layouts`
+* Cache: `/views/cache`
+* Tempalte extname: `.tpl`
+* View engine: Hogan
+
+All these configuration could be changed in `app.js`.
 
 ### RESTful HTTP design ###
 
