@@ -1,6 +1,7 @@
 var express = require('express');
-var hoganX  = require('hogan-express');
 var rainbow = require('rainbow');
+var hoganX  = require('hogan-express');
+var mustlayout = require('mustlayout');
 
 var config  = require('./config');
 
@@ -26,9 +27,6 @@ app.configure(function () {
 		secret: startTime.toString(),
 		cookie: {maxAge: config.session.maxAge}
 	}));
-
-	// 路由处理
-	rainbow.route(app, config.path);
 	
 	// 启用gzip压缩
 	app.use(express.compress());
@@ -45,12 +43,18 @@ app.configure('development', function () {
 	}));
 });
 
-// 配置模板引擎
-app.engine(config.viewExt, hoganX);
-app.set('view engine', config.viewExt);
-app.set('views', __dirname + config.path.views);
-app.set('partials', require('./lib/partials'));
-app.set('layout', 'layouts/page');
+// 路由处理
+rainbow.route(app, config.path);
+
+// 模板引擎配置
+mustlayout.engine(app, {
+    engine: hoganX,
+    ext: config.viewExt,
+    views: config.path.views,
+    partials: config.path.partials,
+    layouts: config.path.layouts,
+    cache: config.path.cache
+});
 
 var port = process.env.PORT;
 
