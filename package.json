@@ -7,7 +7,7 @@
 	"dependencies": {
 		"express": "4.x",
 		"mysql": "2.0.x",
-		"sequelize": "2.0.x",
+		"sequelize": "3.x",
 		"hogan-express": "0.3.x",
 		"rainbow": "0.2.0",
 		"mustlayout": "0.0.2",
@@ -15,7 +15,7 @@
     	"nodemailer": "0.3.x"
 	},
 	"engines": {
-		"node": "0.10.x",
-		"npm": "1.1.x"
+		"node": "5.x",
+		"npm": "3.x"
 	}
 }
