@@ -7,3 +7,8 @@ exports.get = function (req, res) {
 };
 
 exports.get.filters = ['guest'];
+
+exports.put = function (req, res) {
+	console.log('=====>', req.accepts('octet-stream'));
+	Response(res).ok();
+};

@@ -1,4 +1,4 @@
-var db = require('./lib/db');
+var db = require('./models');
 
 var encrypt = require('./lib/util').sha1;
 

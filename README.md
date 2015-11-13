@@ -26,17 +26,13 @@ You need run these steps just once.
 	
 0.  Copy `.env.sample` to `.env`, and configure your database URL in it, also set local HTTP port you like.
 	
-0.	Local service need Ruby gem `foreman` to start. So you need install Ruby and gem `foreman`.
-	
-		$ sudo gem install foreman
-	
 0.  Use this command to initilize MySQL database tables (make sure you've installed MySQL):
 	
-		$ foreman run node install
+		$ env $(cat .env) node install
 
 0.  Start app by this command:
 	
-		$ foreman run nodemon app
+		$ env $(cat .env) nodemon app
 
 ## Architecture ##
 
