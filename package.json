@@ -9,6 +9,8 @@
 		"mysql": "2.0.x",
 		"sequelize": "3.x",
 		"hogan-express": "0.3.x",
+		"cookie-parser": "latest",
+		"cookie-session": "latest",
 		"rainbow": "0.2.0",
 		"mustlayout": "0.0.2",
     	"glob": "3.x",

@@ -2,12 +2,20 @@ var express = require('express');
 var rainbow = require('rainbow');
 var hoganX  = require('hogan-express');
 var mustlayout = require('mustlayout');
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 
 var config  = require('./config');
 
 var startTime = new Date();
 
 var app = express();
+
+app.use(cookieParser());
+app.use(cookieSession({
+	name: 'token',
+	secret: Date.now().toString(16)
+}));
 
 // 路由处理
 rainbow.route(app, config.path);
