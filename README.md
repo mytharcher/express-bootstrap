@@ -20,19 +20,19 @@ Before you begin to develop, make sure you have known something about these:
 You need run these steps just once.
 
 0.  First, you need to use `npm install` to download all depended pacakges.
-	
+
 		$ npm install
 		$ sudo npm install -g nodemon   # nodemon is only for development
-	
-0.  Copy `.env.sample` to `.env`, and configure your database URL in it, also set local HTTP port you like.
-	
-0.  Use this command to initilize MySQL database tables (make sure you've installed MySQL):
-	
+
+0.  Copy `.env.sample` to `.env`, and configure your database URL in it, also set local HTTP port you like. The `db_protocol` could be `mysql` or `postgres`.
+
+0.  Use this command to initilize database tables (make sure you've installed MySQL or Postgresql):
+
 		$ env $(cat .env) node install
 
 0.  Start app by this command:
-	
-		$ env $(cat .env) nodemon app
+
+		$ env $(cat .env) node app
 
 ## Architecture ##
 
@@ -43,15 +43,18 @@ You need run these steps just once.
 	|-- controllers/      # All HTTP API routers, same path as folder
 	|-- filters/          # Interceptor filters before routers
 	|-- lib/              # Local library for application
-	|-- models/           # Sequelize MySQL table definition
+	|-- store/            # Database definition
+	|  |-- mysql/         # Sequelize MySQL table definition
+	|  |-- postgres/      # Sequelize Postgresql table definition
+	|  `-- ...            # Other database driver definition
 	|-- views/            # Templates
-	|-- .env.sample       # Local environment config
-	|-- .gitignore        # 
+	|-- .env.sample       # Local environment config sample
+	|-- .gitignore        #
 	|-- app.js            # Application main file
 	|-- config.json       # Application config
 	|-- package.json      # Node package config
 	|-- Procfile          # Heroku startup command file
-	`-- README.md         # 
+	`-- README.md         #
 
 ### Back end MVC ###
 
@@ -103,55 +106,55 @@ All these configuration could be changed in `app.js`.
 Here is some HTTP status code used for certain meaning of response from server.
 
 *	**200** `ondata`
-	
+
 	Everything is OK, and responese contains some data from server.
-	
+
 *	**201**(\*) `oncreated`
-	
+
 	Create done, and response new created resources.
-	
+
 	May use for creating new data record.
-	
+
 *	**204** `onok`
-	
+
 	A certain operation has been done successfully, and no extra data need to response.
-	
+
 	Used for updating or deleting some data.
-	
+
 *	**205**(\*) `ondone`
-	
+
 	Almost same as `204`, but need to update view.
-	
+
 	May use in login/logout, etc.
-	
+
 *	**400** `onbadrequest`
-	
+
 	Syntax error.
-	
+
 	Query parameters less than required or data type not match.
-	
+
 *	**403** `onforbidden`
-	
+
 	Forbidden. Just indicates that the request need authorization.
-	
+
 *	**404** `onnotfound`
-	
+
 	Not found. Wrong path or resouces not exist (may be private).
-	
+
 *	**409** `onconflict`
-	
-	 Confict. Repeat record.
-	
+
+	Confict. Repeat record.
+
 *	**422**(\*) `onwrongcontent`
-	
+
 	Semantics error.
-	
+
 	Something like `400`, additionally indicates query parameters contains wrong content.
-	
+
 *	**500** `onservererror`
-	
+
 	Server error. There is something wrong in server.
-	
+
 	Mostly indicates that server exceptions have not been caught.
 
 These all could be used in both filters and controllers.
@@ -164,3 +167,4 @@ For more infomation [wiki:HTTP status codes](http://en.wikipedia.org/wiki/HTTP_s
 
 [Express]: http://expressjs.com/
 [Sequelize]: http://www.sequelizejs.com/
+
