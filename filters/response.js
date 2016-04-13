@@ -1,5 +1,3 @@
-var xml = require('xml');
-
 var extension = {
 	// 200
 	data: function (data) {
@@ -7,11 +5,6 @@ var extension = {
 		this.format({
 			'json': function () {
 				res.status(200).json(data);
-			},
-			'xml': function () {
-				var xml = require('xml');
-				
-				res.status(200).send(xml(data));
 			}
 		});
 	},
@@ -62,30 +55,6 @@ var extension = {
 	// 500
 	error: function (err) {
 		this.status(500).send(err || '');
-	},
-
-	// for wechat text message reply
-	wechatReply: function (data) {
-		this.set('Content-Type', 'text/xml');
-		this.send(xml({
-			xml: [
-				{
-					FromUserName: {_cdata: data.from}
-				},
-				{
-					ToUserName: {_cdata: data.to}
-				},
-				{
-					CreateTime: Date.now()
-				},
-				{
-					MsgType: {_cdata: 'text'}
-				},
-				{
-					Content: {_cdata: data.message}
-				}
-			]
-		}));
 	}
 };
 
