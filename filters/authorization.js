@@ -1,7 +1,3 @@
-var approot = process.env.PWD;
-
-var Response = require(approot + '/lib/Response');
-
 exports = module.exports = function (req, res, next) {
 	console.log('processing authorization...');
 	var session = req.session;
@@ -11,6 +7,6 @@ exports = module.exports = function (req, res, next) {
 	} else {
 		console.log('out of session');
 		
-		Response(res).forbidden();
+		res.forbidden();
 	}
 };

@@ -1,12 +1,7 @@
-var approot = process.env.PWD;
-
-var Util = require(approot + '/services/Util');
-var Response = require(approot + '/lib/Response');
-
 module.exports = function (req, res, next) {
-	if (Util.isIDLoginedSync(req)) {
+	if (Boolean(req.session && req.session.accountId)) {
 		next();
 	} else {
-		Response(res).render('index');
+		res.render('index');
 	}
 };

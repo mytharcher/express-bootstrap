@@ -17,6 +17,8 @@ app.use(cookieSession({
 	secret: Date.now().toString(16)
 }));
 
+app.use(require('./filters/response'));
+
 // 路由处理
 rainbow.route(app, config.path);
 
