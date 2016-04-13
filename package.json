@@ -11,7 +11,7 @@
 		"hogan-express": "0.3.x",
 		"cookie-parser": "latest",
 		"cookie-session": "latest",
-		"rainbow": "0.2.0",
+		"rainbow": "0.5.1",
 		"mustlayout": "0.0.2",
     	"glob": "3.x",
     	"nodemailer": "0.3.x"
