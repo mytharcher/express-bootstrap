@@ -10,13 +10,3 @@
 
 	</div>
 </div>
-
-<script>
-var request = new XMLHttpRequest();
-request.open('put', '/', true);
-request.setRequestHeader('accept', 'octet-stream');
-request.send(null);
-request.onreadystatechange = function (req) {
-	console.log(req);
-};
-</script>
