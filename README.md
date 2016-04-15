@@ -24,7 +24,7 @@ You need run these steps just once.
 		$ npm install
 		$ sudo npm install -g nodemon   # nodemon is only for development
 
-0.  Copy `.env.sample` to `.env`, and configure your database URL in it, also set local HTTP port you like. The `db_protocol` could be `mysql` or `postgres`.
+0.  Copy `.env.sample` to `.env`, and configure your database URL in it, also set local HTTP port you like. The `db_protocol` could be `mysql` or `postgres` or any other your are using.
 
 0.  Use this command to initilize database tables (make sure you've installed MySQL or Postgresql):
 
@@ -60,9 +60,9 @@ You need run these steps just once.
 
 #### Model ####
 
-All models are about database tables, and use [Sequelize][] ORM framework to manage them in `models/` folder.
+All models are about database tables, and use [Sequelize][] ORM framework to manage them in `store/<db driver>/` folder.
 
-Every file in `models/` folder defined a database table, use **camel case** table name, excluding a special file `index.js` which maintains all tables associations (1 to 1, 1 to many, many to many) in it.
+Every file in `store/<db driver>/` folder defined a database table, use **camel case** table name, excluding a special file `index.js` which maintains all tables associations (1 to 1, 1 to many, many to many) in it.
 
 #### Controller(action) ####
 
@@ -101,57 +101,57 @@ Use [MustLayout](https://github.com/mytharcher/mustlayout) to configurate expres
 
 All these configuration could be changed in `app.js`.
 
-### RESTful HTTP design ###
+### RESTful HTTP Response ###
 
-Here is some HTTP status code used for certain meaning of response from server.
+Here is some HTTP status code used for certain meaning of response from server. And the methods in this list have been implemented in response object.
 
-*	**200** `ondata`
+*	**200** `data`
 
 	Everything is OK, and responese contains some data from server.
 
-*	**201**(\*) `oncreated`
+*	**201**(\*) `created`
 
 	Create done, and response new created resources.
 
 	May use for creating new data record.
 
-*	**204** `onok`
+*	**204** `ok`
 
 	A certain operation has been done successfully, and no extra data need to response.
 
 	Used for updating or deleting some data.
 
-*	**205**(\*) `ondone`
+*	**205**(\*) `done`
 
 	Almost same as `204`, but need to update view.
 
 	May use in login/logout, etc.
 
-*	**400** `onbadrequest`
+*	**400** `badrequest`
 
 	Syntax error.
 
 	Query parameters less than required or data type not match.
 
-*	**403** `onforbidden`
+*	**403** `forbidden`
 
 	Forbidden. Just indicates that the request need authorization.
 
-*	**404** `onnotfound`
+*	**404** `notfound`
 
 	Not found. Wrong path or resouces not exist (may be private).
 
-*	**409** `onconflict`
+*	**409** `conflict`
 
 	Confict. Repeat record.
 
-*	**422**(\*) `onwrongcontent`
+*	**422**(\*) `wrongcontent`
 
 	Semantics error.
 
 	Something like `400`, additionally indicates query parameters contains wrong content.
 
-*	**500** `onservererror`
+*	**500** `servererror`
 
 	Server error. There is something wrong in server.
 
