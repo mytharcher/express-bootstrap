@@ -1,6 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 
+require('dotenv').config();
+
 var Sequelize = require('sequelize');
 
 var db = new Sequelize(process.env.DATABASE_URL, {

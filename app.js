@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express');
 var rainbow = require('rainbow');
 var hoganX  = require('hogan-express');

@@ -28,11 +28,11 @@ You need run these steps just once.
 
 0.  Use this command to initilize database tables (make sure you've installed MySQL or Postgresql):
 
-		$ env $(cat .env) node install
+		$ node install
 
 0.  Start app by this command:
 
-		$ env $(cat .env) node app
+		$ node app
 
 ## Architecture ##
 
