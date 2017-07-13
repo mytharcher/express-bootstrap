@@ -18,7 +18,6 @@
     	"nodemailer": "0.3.x"
 	},
 	"engines": {
-		"node": "5.x",
-		"npm": "3.x"
+		"node": "latest"
 	}
 }
