@@ -12,7 +12,6 @@ Before you begin to develop, make sure you have known something about these:
 0. [Express][]: node.js web application framework
 0. [Sequelize][]: node.js database ORM middleware
 0. MySQL
-0. [Heroku](http://www.heroku.com/): this sample is held on Heroku PaaS
 0. [mustache](http://mustache.github.com/) ([Hogan](https://github.com/twitter/hogan.js), [Handlebars](http://handlebarsjs.com/)): logic-less template engine
 
 ## Local deployment ##
@@ -22,17 +21,18 @@ You need run these steps just once.
 0.  First, you need to use `npm install` to download all depended pacakges.
 
 		$ npm install
-		$ sudo npm install -g nodemon   # nodemon is only for development
 
 0.  Copy `.env.sample` to `.env`, and configure your database URL in it, also set local HTTP port you like. The `db_protocol` could be `mysql` or `postgres` or any other your are using.
 
 0.  Use this command to initilize database tables (make sure you've installed MySQL or Postgresql):
 
-		$ node install
+		$ npm run init-databases
 
 0.  Start app by this command:
 
-		$ node app
+		$ npm run dev
+
+	The `nodemon` will be used to watch any modifications.
 
 ## Architecture ##
 
@@ -44,17 +44,13 @@ You need run these steps just once.
 	|-- filters/          # Interceptor filters before routers
 	|-- lib/              # Local library for application
 	|-- store/            # Database definition
-	|  |-- mysql/         # Sequelize MySQL table definition
-	|  |-- postgres/      # Sequelize Postgresql table definition
+	|  |-- db/
+	|  |  |-- migrations/ # Sequelize migration files
+	|  |  |-- models/     # Sequelize database table definition
 	|  `-- ...            # Other database driver definition
-	|-- views/            # Templates
 	|-- .env.sample       # Local environment config sample
-	|-- .gitignore        #
-	|-- app.js            # Application main file
-	|-- config.json       # Application config
-	|-- package.json      # Node package config
-	|-- Procfile          # Heroku startup command file
-	`-- README.md         #
+	|-- app.js            # Application main file, which will be exported as a module
+	`-- server.js         # Npm default start script
 
 ### Back end MVC ###
 
@@ -70,34 +66,20 @@ Just like `Action` layer in Java SSH, or controller in PHP CI, here controllers'
 
 All files under `controllers/` folder would have same path when client request. For example, `controllers/index.js` would catch request from `http://yourhost/`, `controllers/account/login.js` would catch request from `http://yourhost/account/login`.
 
-In order to do some pre-treatment before real action process, there designed a filter layer just like interceptors in Java SSH. And it is easy to maintain in `filters/` folder. Every filter is a [Express][] request handling router, which can be use as real routers but not. Filter should exports a `function`, with parameters `request`, `response` and `next`.
+In order to do some pre-treatment before real action process, there designed a filter layer just like interceptors in Java SSH. And it is easy to maintain in `middlewares/` folder, each file in it is an [Express][] middleware.
 
 If a controller need to be intercepted by some filters, it should be define like this:
 
 	// real controller process
-	module.get = function (req, res, next) {
-		// ...
-		res.send(200, 'OK');
-	};
-
-	// filters which have same name in `filters/` folder
-	// if defined, must be an Array
-	module.get.filters = ['authorization'];
-
-And if an action don't need filters, the controller definition just exports a process function is also ok.
+	exports.GET = [
+		authoriticate,
+		function (req, res, next) {
+			// ...
+			res.send(200, 'OK');
+		}
+	];
 
 All controllers routing had been move to a single npm. See more about [Rainbow](https://github.com/mytharcher/rainbow).
-
-#### View (template engine) ####
-
-Use [MustLayout](https://github.com/mytharcher/mustlayout) to configurate express view engine. Default to:
-
-* Views: `/views`
-* Partials: `/views/partials`
-* Layouts: `/views/layouts`
-* Cache: `/views/cache`
-* Tempalte extname: `.tpl`
-* View engine: Hogan
 
 All these configuration could be changed in `app.js`.
 

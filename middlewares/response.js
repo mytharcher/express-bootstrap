@@ -1,60 +1,86 @@
-var extension = {
+const extension = {
 	// 200
-	data: function (data) {
-		var res = this;
+	data(data) {
 		this.format({
-			'json': function () {
-				res.status(200).json(data);
+			'json': () => {
+				this.status(200).json(data);
 			}
 		});
+
+		return this;
 	},
 
 	// 201
-	created: function (data) {
+	created(data) {
 		this.status(201).json(data);
+
+		return this;
 	},
 
 	// 204
-	ok: function () {
+	ok() {
 		this.sendStatus(204);
+
+		return this;
 	},
 
 	// 205
-	done: function () {
+	done() {
 		this.sendStatus(205);
+
+		return this;
 	},
 
 	// 400
-	badrequest: function () {
+	badrequest() {
 		this.sendStatus(400);
+
+		return this;
+	},
+
+	// 401
+	unauthorized() {
+		this.sendStatus(401);
+
+		return this;
 	},
 
 	// 403
-	forbidden: function () {
+	forbidden() {
 		this.sendStatus(403);
+
+		return this;
 	},
 
 	// 404
-	notfound: function () {
+	notfound() {
 		this.sendStatus(404);
+
+		return this;
 	},
 
 	// 409
-	conflict: function () {
+	conflict() {
 		this.sendStatus(409);
+
+		return this;
 	},
 
 	// 422
-	invalid: function (fields) {
+	invalid(fields) {
 		this.status(422);
 		if (fields) {
 			this.json(fields);
 		}
+
+		return this;
 	},
 
 	// 500
-	error: function (err) {
+	error(err) {
 		this.status(500).send(err || '');
+
+		return this;
 	}
 };
 

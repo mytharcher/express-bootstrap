@@ -1,41 +1,23 @@
-require('dotenv').config();
-
 var express = require('express');
 var rainbow = require('rainbow');
-var hoganX  = require('hogan-express');
-var mustlayout = require('mustlayout');
 var cookieParser = require('cookie-parser');
-var cookieSession = require('cookie-session');
+var bodyParser = require('body-parser');
 
-var config  = require('./config');
 
-var startTime = new Date();
 
 var app = express();
 
+app.set('x-powered-by', false);
+
 app.use(cookieParser());
-app.use(cookieSession({
-	name: 'token',
-	secret: Date.now().toString(16)
+app.use(bodyParser.urlencoded({
+	extended: true
 }));
+app.use(bodyParser.json());
 
-app.use(require('./filters/response'));
+app.use(require('./middlewares/response'));
 
-// 路由处理
-rainbow.route(app, config.path);
+// routes managed by rainbow
+app.use(rainbow());
 
-// 模板引擎配置
-mustlayout.engine(app, {
-    engine: hoganX,
-    ext: config.viewExt,
-    views: config.path.views,
-    partials: config.path.partials,
-    layouts: config.path.layouts,
-    cache: config.path.cache
-});
-
-var port = process.env.PORT;
-
-app.listen(port, function() {
-	console.log("Server start at %s. Listening on %d", startTime, port);
-});
+module.exports = app;
