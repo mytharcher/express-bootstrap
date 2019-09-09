@@ -1,20 +1,21 @@
 Express Bootstrap
 =================
 
-Bootstrap for Node.js express web applications.
+Bootstrap for Node.js RESTful web applications based on [Express][].
 
-## Know before start ##
+Know before start
+----------
 
 Before you begin to develop, make sure you have known something about these:
 
 0. JavaScript
-0. [node API](http://nodejs.org/api/)
+0. [Node.js](http://nodejs.org/api/)
 0. [Express][]: node.js web application framework
 0. [Sequelize][]: node.js database ORM middleware
-0. MySQL
-0. [mustache](http://mustache.github.com/) ([Hogan](https://github.com/twitter/hogan.js), [Handlebars](http://handlebarsjs.com/)): logic-less template engine
+0. Relational Database: such as MySQL or PostgreSQL
 
-## Local deployment ##
+Local deployment
+----------
 
 You need run these steps just once.
 
@@ -39,26 +40,26 @@ You need run these steps just once.
 ### Folder structure ###
 
 	.
-	|-- assets/           # Static files, including JS, CSS, images
 	|-- controllers/      # All HTTP API routers, same path as folder
-	|-- filters/          # Interceptor filters before routers
-	|-- lib/              # Local library for application
+	|-- middlewares/      # Interceptor filters before routers
+	|-- services/         # Main business logic code as service layer
 	|-- store/            # Database definition
 	|  |-- db/
 	|  |  |-- migrations/ # Sequelize migration files
 	|  |  |-- models/     # Sequelize database table definition
 	|  `-- ...            # Other database driver definition
+	|-- utils/            # Local utilities library for application
 	|-- .env.sample       # Local environment config sample
-	|-- app.js            # Application main file, which will be exported as a module
+	|-- app.js            # Application main file, which could be exported as a module
 	`-- server.js         # Npm default start script
 
 ### Back end MVC ###
 
 #### Model ####
 
-All models are about database tables, and use [Sequelize][] ORM framework to manage them in `store/<db driver>/` folder.
+All models are about database tables, and use [Sequelize][] ORM framework to manage them in `store/<db instance>/` folder.
 
-Every file in `store/<db driver>/` folder defined a database table, use **camel case** table name, excluding a special file `index.js` which maintains all tables associations (1 to 1, 1 to many, many to many) in it.
+Every file in `store/<db instance>/` folder defined a database table, use **camel case** table name, excluding a special file `index.js` which maintains all tables associations (1 to 1, 1 to many, many to many) in it.
 
 #### Controller(action) ####
 
@@ -149,4 +150,3 @@ For more infomation [wiki:HTTP status codes](http://en.wikipedia.org/wiki/HTTP_s
 
 [Express]: http://expressjs.com/
 [Sequelize]: http://www.sequelizejs.com/
-
