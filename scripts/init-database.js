@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var db = require('../store/postgres');
+var db = require('../store/db');
 
 if (process.env.NODE_ENV === 'production') {
   console.error('This script is forbidden to run in production.');

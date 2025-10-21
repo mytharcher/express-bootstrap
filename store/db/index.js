@@ -5,19 +5,11 @@ require('dotenv').config();
 
 var Sequelize = require('sequelize');
 
-var rc = require('../../.sequelizerc');
+const loadModel = require('./loadModel');
 var options = require('./options');
 
 var db = new Sequelize(process.env.DATABASE_URL, options);
 
-console.debug('Database configuration initialized.')
-
-fs.readdirSync(path.join(process.env.PWD, rc['models-path'])).forEach(function (file) {
-	if (!file.startsWith('.')) {
-		db['import'](file);
-
-		console.debug(`SQL table definition ${file} imported.`);
-	}
-});
+loadModel(db, path.join(__dirname, './models'));
 
 module.exports = db;
