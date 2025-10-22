@@ -1,10 +1,7 @@
 const db = require('../store/db');
 
 exports.GET = async function (req, res) {
-	const posts = await db.models.posts.findAll({
-		order: [['createdAt', 'DESC']],
-		limit: 20,
-	});
+	const posts = await db.models.posts.findAll(res.locals.queryOptions);
 	res.json(posts);
 };
 
