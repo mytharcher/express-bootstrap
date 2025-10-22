@@ -23,6 +23,13 @@ module.exports = function (dbc, Sequelize) {
 			foreignKey: 'categoryId',
 			as: 'category',
 		});
+
+		Model.belongsToMany(models.tags, {
+            through: 'post_tags',
+            foreignKey: 'postId',
+			otherKey: 'tagId',
+			as: 'tags',
+		});
 	};
 
 	return Model;
