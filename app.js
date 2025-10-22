@@ -51,6 +51,9 @@ function parseFilter(filters) {
 }
 
 app.use((req, res, next) => {
+	if (req.method === 'GET' && !req.params || !Object.keys(req.params).length) {
+		return next();
+	}
 	const { filter, sort = 'id', page = 1, pageSize = 20 } = req.query;
 	const order = [[sort.startsWith('-') ? sort.slice(1) : sort, sort.startsWith('-') ? 'DESC' : 'ASC']];
 	
